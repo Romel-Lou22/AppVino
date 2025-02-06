@@ -1,0 +1,22 @@
+name: Deploy to Docker
+
+on:
+  push:
+    branches:
+      - main  # Se ejecutará cuando haya cambios en la rama 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Ejecuta la acción en un servidor de GitHub
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Clona el repositorio dentro del runner de GitHub
+
+      - name: Set up Docker
+        run: |
+          docker --version  # Verifica que Docker está instalado
+
+      - name: Build and run containers
+        run: |
+          docker-compose up -d --build  # Construye y ejecuta los contenedores
